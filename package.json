@@ -1,0 +1,57 @@
+{
+  "name": "react-timer-component",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": ">= 6.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "storybook:deploy": "storybook-to-ghpages"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noriaki/react-timer-component.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Noriaki Uchiyama",
+    "email": "uchiyama.noriaki@gmail.com",
+    "url": "https://github.com/noriaki"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/noriaki/react-timer-component/issues"
+  },
+  "homepage": "https://github.com/noriaki/react-timer-component#readme",
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react": "0.14.x || >= 15.x",
+    "react-style-proptype": "^3.0.0",
+    "react-timer-mixin": "^0.13.3"
+  },
+  "devDependencies": {
+    "@kadira/storybook-deployer": "^1.2.0",
+    "@storybook/addon-actions": "^3.0.1",
+    "@storybook/addon-info": "^3.0.1",
+    "@storybook/react": "^3.0.1",
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-preset-env": "^1.5.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-jsx-a11y": "^5.0.3",
+    "eslint-plugin-react": "^7.0.1",
+    "react-dom": "^15.5.4"
+  },
+  "storybook-deployer": {
+    "gitUsername": "Noriaki Uchiyama",
+    "gitEmail": "uchiyama.noriaki@gmail.com",
+    "commitMessage": "Deploy Storybook to GitHub Pages (by @kadira/storybook-deployer)"
+  }
+}
