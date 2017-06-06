@@ -11,7 +11,7 @@ const Countdown = (props, context) => {
     milliseconds: d.getUTCMilliseconds(),
   };
   return (
-    <p>{`${seconds}.${milliseconds}`}</p>
+    <span>{`${seconds}.${milliseconds}`}</span>
   );
 };
 
@@ -20,6 +20,8 @@ Countdown.contextTypes = {
 };
 
 const markdownCountdown = `
+----
+
 ## Usage
 
 Timer's child components (e.g. <Countdown />) are passed \`context.remaining\`,
@@ -45,39 +47,31 @@ Countdown.contextTypes = {
 ~~~
 `;
 
-storiesOf('Timer (Countdown)', module)
-  .addWithInfo('basic', markdownCountdown, () => (
-    <div>
-      <h1>Countdown</h1>
-      <Timer remaining={20 * 1000}>
-        <Countdown />
-      </Timer>
-    </div>
-  ))
+const infoOptions = { inline: true, propTables: [Timer] };
+
+storiesOf('Timer', module)
+  .addWithInfo('basic usage', markdownCountdown, () => (
+    <Timer remaining={20 * 1000}>
+      <Countdown />
+    </Timer>
+  ), infoOptions)
   .addWithInfo('props: interval (msec)', markdownCountdown, () => (
-    <div>
-      <h1>Countdown</h1>
-      <Timer remaining={20 * 1000} interval={20}>
-        <Countdown />
-      </Timer>
-    </div>
-  ))
+    <Timer remaining={20 * 1000} interval={20}>
+      <Countdown />
+    </Timer>
+  ), infoOptions)
   .addWithInfo('props: style (container <div>)', markdownCountdown, () => (
-    <div>
-      <h1>Countdown</h1>
-      <Timer remaining={20 * 1000} style={{ backgroundColor: '#d0d0d0' }}>
-        <Countdown />
-      </Timer>
-    </div>
-  ))
+    <Timer
+      remaining={20 * 1000}
+      style={{ color: 'white', backgroundColor: '#606060', padding: 16 }}>
+      <Countdown />
+    </Timer>
+  ), infoOptions)
   .addWithInfo('props: callbacks', markdownCountdown, () => (
-    <div>
-      <h1>Countdown</h1>
-      <Timer
-        remaining={20 * 1000}
-        afterTick={action('afterTickCallback')}
-        afterComplete={action('afterCompleteCallback')}>
-        <Countdown />
-      </Timer>
-    </div>
-  ));
+    <Timer
+      remaining={20 * 1000}
+      afterTick={action('afterTickCallback')}
+      afterComplete={action('afterCompleteCallback')}>
+      <Countdown />
+    </Timer>
+  ), infoOptions);
