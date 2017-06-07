@@ -1,13 +1,14 @@
 {
   "name": "react-timer-component",
   "version": "0.1.1",
-  "description": "",
-  "main": "index.js",
+  "description": "A timer component for React that passing remaining milliseconds by context using",
+  "main": "lib/Timer.js",
   "engines": {
     "node": ">= 6.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src --out-dir lib --ignore src/stories",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "storybook:deploy": "storybook-to-ghpages"
   },
@@ -15,7 +16,6 @@
     "type": "git",
     "url": "git+https://github.com/noriaki/react-timer-component.git"
   },
-  "keywords": [],
   "author": {
     "name": "Noriaki Uchiyama",
     "email": "uchiyama.noriaki@gmail.com",
@@ -26,6 +26,16 @@
     "url": "https://github.com/noriaki/react-timer-component/issues"
   },
   "homepage": "https://github.com/noriaki/react-timer-component#readme",
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "react",
+    "react-component",
+    "timer",
+    "interval",
+    "countdown"
+  ],
   "dependencies": {
     "prop-types": "^15.5.10",
     "react": "0.14.x || >= 15.x",
