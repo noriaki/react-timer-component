@@ -42,8 +42,7 @@
     "react": ">= 15.x"
   },
   "dependencies": {
-    "react-style-proptype": "^3.0.0",
-    "react-timer-mixin": "^0.13.3"
+    "react-style-proptype": "^3.0.0"
   },
   "devDependencies": {
     "@kadira/storybook-deployer": "^1.2.0",
