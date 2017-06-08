@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import stylePropType from 'react-style-proptype';
-import TimerMixin from 'react-timer-mixin';
 
 export default class Timer extends Component {
   static propTypes = {
@@ -27,7 +26,7 @@ export default class Timer extends Component {
 
   state = {
     remaining: this.props.remaining,
-    timerId: TimerMixin.setInterval(this.handleTick.bind(this), this.props.interval),
+    timerId: setInterval(this.handleTick.bind(this), this.props.interval),
     prevTime: (new Date()).getTime(),
   }
 
@@ -36,7 +35,7 @@ export default class Timer extends Component {
   }
 
   componentWillUnmount() {
-    TimerMixin.clearTimeout(this.state.timerId);
+    clearInterval(this.state.timerId);
   }
 
   handleTick() {
@@ -44,7 +43,7 @@ export default class Timer extends Component {
     const elapsed = currentTime - this.state.prevTime;
     const nextRemaining = this.state.remaining - elapsed;
     if (nextRemaining <= 0) {
-      TimerMixin.clearTimeout(this.state.timerId);
+      clearInterval(this.state.timerId);
       if (this.props.afterComplete !== null) {
         this.props.afterComplete();
       }
