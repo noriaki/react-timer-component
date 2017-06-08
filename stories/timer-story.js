@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import Timer from '../Timer';
+import Timer from '../src/Timer';
 
 const Countdown = (props, context) => {
   const d = new Date(context.remaining);
