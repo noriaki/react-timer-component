@@ -9,7 +9,7 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch --notify",
-    "build": "babel src --out-dir lib --ignore src/stories",
+    "build": "babel src --out-dir lib",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "storybook:deploy": "storybook-to-ghpages"
   },
