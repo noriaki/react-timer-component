@@ -1,6 +1,6 @@
 {
   "name": "react-timer-component",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "A timer component for React that passing remaining milliseconds by context using",
   "main": "lib/Timer.js",
   "engines": {
