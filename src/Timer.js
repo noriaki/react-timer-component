@@ -27,7 +27,7 @@ export default class Timer extends Component {
   state = {
     remaining: this.props.remaining,
     timerId: setInterval(this.handleTick.bind(this), this.props.interval),
-    prevTime: (new Date()).getTime(),
+    prevTime: Date.now(),
   }
 
   getChildContext() {
@@ -39,7 +39,7 @@ export default class Timer extends Component {
   }
 
   handleTick() {
-    const currentTime = (new Date()).getTime();
+    const currentTime = Date.now();
     const elapsed = currentTime - this.state.prevTime;
     const nextRemaining = this.state.remaining - elapsed;
     if (nextRemaining <= 0) {
