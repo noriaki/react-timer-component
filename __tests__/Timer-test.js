@@ -36,11 +36,14 @@ describe('<Timer />', () => {
     let handleTickFn;
     let wrapper;
     const initialRemaining = 20000;
+    const shallowOpts = { lifecycleExperimental: true };
+
     beforeEach(() => {
       clock = sinon.useFakeTimers();
       handleTickFn = sinon.spy(Timer.prototype, 'handleTick');
       wrapper = undefined;
     });
+
     afterEach(() => {
       clock.restore();
       handleTickFn.restore();
@@ -48,10 +51,13 @@ describe('<Timer />', () => {
     });
 
     it('should tick', () => {
-      wrapper = shallow(<Timer remaining={initialRemaining} />);
+      wrapper = shallow(<Timer remaining={initialRemaining} />, shallowOpts);
+
       expect(wrapper.state('remaining')).toBe(initialRemaining);
+
       clock.tick(999);
       expect(wrapper.state('remaining')).toBe(initialRemaining);
+
       clock.tick(1);
       expect(handleTickFn.calledOnce).toBe(true);
       expect(wrapper.state('remaining')).toBe(initialRemaining - 1000);
@@ -60,11 +66,15 @@ describe('<Timer />', () => {
     it('should tick specific interval props', () => {
       const initialInterval = 100;
       wrapper = shallow(
-        <Timer remaining={initialRemaining} interval={initialInterval} />
+        <Timer remaining={initialRemaining} interval={initialInterval} />,
+        shallowOpts
       );
+
       expect(wrapper.state('remaining')).toBe(initialRemaining);
+
       clock.tick(99);
       expect(wrapper.state('remaining')).toBe(initialRemaining);
+
       clock.tick(1);
       expect(handleTickFn.calledOnce).toBe(true);
       expect(wrapper.state('remaining'))
@@ -73,17 +83,21 @@ describe('<Timer />', () => {
 
     it('should clear interval after complete ticks', () => {
       const clearIntervalFn = sinon.spy(global, 'clearInterval');
-      wrapper = shallow(<Timer remaining={initialRemaining} />);
+      wrapper = shallow(<Timer remaining={initialRemaining} />, shallowOpts);
+
       expect(clearIntervalFn.callCount).toBe(0);
+
       clock.tick(initialRemaining);
       expect(clearIntervalFn.calledOnce).toBe(true);
-      expect(wrapper.state('timerId')).toBeNull();
+      expect(wrapper.instance().timerId).toBeNull();
     });
 
     it('should clear interval if unmount', () => {
       const clearIntervalFn = sinon.spy(global, 'clearInterval');
-      wrapper = shallow(<Timer remaining={initialRemaining} />);
+      wrapper = shallow(<Timer remaining={initialRemaining} />, shallowOpts);
+
       expect(clearIntervalFn.callCount).toBe(0);
+
       wrapper.unmount();
       expect(clearIntervalFn.calledOnce).toBe(true);
     });
@@ -91,25 +105,37 @@ describe('<Timer />', () => {
     it('should call callback `afterTick` after each ticks', () => {
       const afterTickFn = jest.fn();
       wrapper = shallow(
-        <Timer remaining={initialRemaining} afterTick={afterTickFn} />
+        <Timer remaining={initialRemaining} afterTick={afterTickFn} />,
+        shallowOpts
       );
-      expect(afterTickFn).not.toBeCalled();
+
+      expect(afterTickFn).not.toHaveBeenCalled();
+
       clock.tick(999);
-      expect(afterTickFn).not.toBeCalled();
+      expect(afterTickFn).not.toHaveBeenCalled();
+
       clock.tick(1);
       expect(afterTickFn).toHaveBeenCalledTimes(1);
+
       clock.tick(1000);
       expect(afterTickFn).toHaveBeenCalledTimes(2);
+
+      clock.tick(8000);
+      expect(afterTickFn).toHaveBeenCalledTimes(10);
     });
 
     it('should call callback `afterComplete` after complete ticks', () => {
       const afterCompleteFn = jest.fn();
       wrapper = shallow(
-        <Timer remaining={initialRemaining} afterComplete={afterCompleteFn} />
+        <Timer remaining={initialRemaining} afterComplete={afterCompleteFn} />,
+        shallowOpts
       );
-      expect(afterCompleteFn).not.toBeCalled();
+
+      expect(afterCompleteFn).not.toHaveBeenCalled();
+
       clock.tick(initialRemaining - 1);
-      expect(afterCompleteFn).not.toBeCalled();
+      expect(afterCompleteFn).not.toHaveBeenCalled();
+
       clock.tick(1);
       expect(afterCompleteFn).toHaveBeenCalledTimes(1);
     });
@@ -118,9 +144,12 @@ describe('<Timer />', () => {
       wrapper = mount(
         <Timer remaining={initialRemaining}><TestDisplay /></Timer>
       );
+
       expect(wrapper.find('span').text()).toBe(`${initialRemaining}`);
+
       clock.tick(999);
       expect(wrapper.find('span').text()).toBe(`${initialRemaining}`);
+
       clock.tick(1);
       expect(wrapper.find('span').text()).toBe(`${initialRemaining - 1000}`);
     });
