@@ -24,39 +24,48 @@ export default class Timer extends Component {
     remaining: PropTypes.number,
   }
 
-  state = {
-    remaining: this.props.remaining,
-    timerId: setInterval(this.handleTick.bind(this), this.props.interval),
-    prevTime: Date.now(),
+  constructor(props, ...args) {
+    super(props, ...args);
+    this.timerId = null;
+    this.prevTime = null;
+    this.state = { remaining: props.remaining };
   }
 
   getChildContext() {
     return { remaining: this.state.remaining };
   }
 
+  componentDidMount() {
+    this.timerId = setInterval(this.handleTick.bind(this), this.props.interval);
+    this.prevTime = Date.now();
+  }
+
   componentWillUnmount() {
-    clearInterval(this.state.timerId);
+    this.clearTimer();
+  }
+
+  clearTimer() {
+    clearInterval(this.timerId);
+    this.timerId = null;
+    this.prevTime = null;
   }
 
   handleTick() {
     const currentTime = Date.now();
-    const elapsed = currentTime - this.state.prevTime;
+    const elapsed = currentTime - this.prevTime;
     const nextRemaining = this.state.remaining - elapsed;
     if (nextRemaining <= 0) {
-      clearInterval(this.state.timerId);
       if (this.props.afterComplete !== null) {
         this.props.afterComplete();
       }
-      this.setState({
-        remaining: 0, timerId: null, prevTime: null,
-      });
+      this.clearTimer();
+      this.setState({ remaining: 0 });
     } else {
-      this.setState({
-        ...this.state, remaining: nextRemaining, prevTime: currentTime,
-      });
       if (this.props.afterTick !== null) {
         this.props.afterTick(nextRemaining);
       }
+      this.prevTime = currentTime;
+      this.setState({ remaining: nextRemaining });
     }
   }
 
