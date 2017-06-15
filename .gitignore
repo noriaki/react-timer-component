@@ -57,3 +57,7 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# static assets for storybook
+/assets/
+/.out/

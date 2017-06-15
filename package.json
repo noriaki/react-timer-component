@@ -1,6 +1,6 @@
 {
   "name": "react-timer-component",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A timer component for React that passing remaining milliseconds by context using",
   "main": "lib/Timer.js",
   "engines": {
@@ -11,7 +11,10 @@
     "test:watch": "jest --watch --notify",
     "build": "babel src --out-dir lib",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "storybook:deploy": "storybook-to-ghpages"
+    "build-storybook": "build-storybook -s assets -o .out",
+    "deploy-storybook": "storybook-to-ghpages",
+    "postversion": "yarn && yarn test && yarn build",
+    "postpublish": "yarn deploy-storybook"
   },
   "repository": {
     "type": "git",

@@ -14,6 +14,7 @@ Functional React component, pass `context.remaining` to any child presentational
 
 ## Demo
 
+![react-timer-component example (all-in-one)](https://raw.githubusercontent.com/noriaki/react-timer-component/gh-pages/images/examples-screencast.gif)<br />
 https://noriaki.github.io/react-timer-component/<br />
 (with [storybooks/storybook](https://github.com/storybooks/storybook/))
 
@@ -99,7 +100,7 @@ Countdown.contextTypes = {
 
 ## Licence
 
-[MIT](https://github.com/noriaki/react-timer-component/blob/master/LICENCE)
+[MIT](https://github.com/noriaki/react-timer-component/blob/master/LICENSE)
 
 ## Author
 
