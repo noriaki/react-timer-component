@@ -24,8 +24,7 @@ const markdownCountdown = `
 
 ## Usage
 
-Timer's child components (e.g. <Countdown />) are passed \`context.remaining\`,
-and required \`.contextTypes { remaining: PropTypes.number }\` for using context.
+Child presentational component (e.g. \`<Countdown />\`) are passed \`context.remaining\`. For that purpose, requiring \`contextTypes\` setting to component static property.
 
 ### Child component example
 
@@ -49,7 +48,7 @@ Countdown.contextTypes = {
 
 const infoOptions = { inline: true, propTables: [Timer] };
 
-storiesOf('Timer', module)
+storiesOf('<Timer /> Usage', module)
   .addWithInfo('basic usage', markdownCountdown, () => (
     <Timer remaining={20 * 1000}>
       <Countdown />

@@ -11,8 +11,9 @@
     "test:watch": "jest --watch --notify",
     "build": "babel src --out-dir lib",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "storybook:deploy": "storybook-to-ghpages",
-    "prepublish": "yarn && yarn test && yarn build",
+    "build-storybook": "build-storybook -s assets -o .out",
+    "deploy-storybook": "storybook-to-ghpages",
+    "postversion": "yarn && yarn test && yarn build",
     "postpublish": "yarn storybook:deploy"
   },
   "repository": {
