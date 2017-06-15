@@ -14,7 +14,7 @@
     "build-storybook": "build-storybook -s assets -o .out",
     "deploy-storybook": "storybook-to-ghpages",
     "postversion": "yarn && yarn test && yarn build",
-    "postpublish": "yarn storybook:deploy"
+    "postpublish": "yarn deploy-storybook"
   },
   "repository": {
     "type": "git",
