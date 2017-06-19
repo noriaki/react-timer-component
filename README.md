@@ -1,5 +1,7 @@
 # react-timer-component
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/noriaki/react-timer-component.svg)](https://greenkeeper.io/)
+
 > A timer component for React that passing `remaining` milliseconds by `context` using<br />
 > `コンテキスト`によって残り時間`remaining`（ミリ秒）を渡すタイプのカウントダウン・タイマーReactコンポーネント
 
